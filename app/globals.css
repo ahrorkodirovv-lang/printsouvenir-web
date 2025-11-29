@@ -1,45 +1,211 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f2f2f2;
-  --foreground: #1a1a1a;
-  /* Light Theme Colors */
-  --light-bg: #f2f2f2;
-  --light-text: #1a1a1a;
-  --light-primary: #6a1f1f;
-  --light-accent: #ffffff;
-  /* Dark Theme Colors */
-  --dark-bg: #000000;
-  --dark-text: #ffffff;
-  --dark-primary: #6a1f1f;
-  --dark-accent: #f2f2f2;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  /* Light Theme */
-  --color-light-bg: var(--light-bg);
-  --color-light-text: var(--light-text);
-  --color-light-primary: var(--light-primary);
-  --color-light-accent: var(--light-accent);
-  /* Dark Theme */
-  --color-dark-bg: var(--dark-bg);
-  --color-dark-text: var(--dark-text);
-  --color-dark-primary: var(--dark-primary);
-  --color-dark-accent: var(--dark-accent);
+  /* Light Theme - Default */
+  --background: 60 7% 97%; /* ivory-white */
+  --foreground: 0 0% 4%; /* rich-black */
+  --card: 0 0% 95%; /* soft-gray */
+  --card-foreground: 0 0% 4%; /* rich-black */
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 4%;
+  --primary: 0 55% 27%; /* royal-burgundy */
+  --primary-foreground: 0 0% 98%;
+  --secondary: 38 47% 60%; /* gold-accent */
+  --secondary-foreground: 0 0% 4%;
+  --muted: 37 21% 88%; /* champagne-beige */
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 55% 27%; /* royal-burgundy */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 84%; /* warm-divider */
+  --input: 0 0% 84%; /* warm-divider */
+  --ring: 0 55% 27%; /* royal-burgundy */
+  --radius: 0.5rem;
 }
 
 .dark {
-  --background: #000000;
-  --foreground: #ffffff;
+  /* Dark Mode — Premium Eclipse */
+  --background: 240 4% 5%; /* #0B0B0C Evening Black */
+  --foreground: 0 0% 100%; /* #FFFFFF Pure White */
+  --card: 347 21% 8%; /* #1A1113 Shadow Purple */
+  --card-foreground: 0 0% 100%; /* Pure White */
+  --popover: 0 0% 7%; /* slightly brighter overlay */
+  --popover-foreground: 0 0% 100%;
+  --primary: 35 49% 67%; /* #D4B483 Luxe Gold */
+  --primary-foreground: 0 0% 4%; /* Deep neutral for contrast */
+  --secondary: 0 55% 27%; /* #6A1F1F Royal Burgundy */
+  --secondary-foreground: 0 0% 98%; /* Soft white */
+  --muted: 0 0% 8%; /* #151515 Obsidian Gray */
+  --muted-foreground: 0 0% 79%; /* #C9C9C9 Moonlight Gray */
+  --accent: 0 55% 27%; /* Burgundy accents */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 47% 15%; /* #3A1515 Muted Red Glow */
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 47% 15%; /* Muted Red Glow */
+  --input: 0 0% 8%; /* Obsidian Gray */
+  --ring: 35 49% 67%; /* Luxe Gold */
+  --subtle-text: 0 0% 69%; /* #AFAFAF Dim White */
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: hsl(var(--muted) / 0.2);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted) / 0.4);
+    border-radius: 9999px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted) / 0.6);
+  }
+  
+  /* Selection styles */
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+  
+  /* Focus styles */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary) / 0.5);
+    outline-offset: 2px;
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    --tw-ring-opacity: 1;
+    --tw-ring-color: hsl(var(--ring) / var(--tw-ring-opacity));
+    --tw-ring-offset-width: 2px;
+  }
+}
+
+/* Container */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 80rem;
+}
+
+/* Card */
+.card {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border-radius: calc(var(--radius) + 2px);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-width: 2px;
+  --tw-ring-color: hsl(var(--ring));
+  --tw-ring-offset-color: hsl(var(--background));
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover {
+  background-color: hsl(var(--primary) / 0.9);
+}
+
+.btn-secondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.btn-secondary:hover {
+  background-color: hsl(var(--secondary) / 0.8);
+}
+
+.btn-outline {
+  border: 1px solid hsl(var(--input));
+}
+
+.btn-outline:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Input */
+.input {
+  display: flex;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid hsl(var(--input));
+  background-color: hsl(var(--background));
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.input:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-width: 2px;
+  --tw-ring-color: hsl(var(--ring));
+  --tw-ring-offset-color: hsl(var(--background));
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
